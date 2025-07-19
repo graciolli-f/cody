@@ -1,0 +1,29 @@
+Build a collaborative document editor following these guidelines:
+
+Architecture:
+- Separate concerns between frontend and backend
+- Use React for UI components
+- Keep database logic separate from business logic
+- Follow RESTful API design where appropriate
+- Implement proper error handling and validation
+
+Code Quality:
+- Functions should do one thing
+- Keep files under 300 lines
+- Use meaningful variable names
+- Add JSDoc comments for public functions
+- Avoid global variables
+- Handle async operations properly
+
+Security:
+- Validate user input
+- Don't expose sensitive data in responses
+- Use environment variables for configuration
+- Implement proper authentication
+
+Performance:
+- Optimize database queries
+- Implement caching where beneficial
+- Minimize API calls from the frontend
+
+Please ensure the code is production-ready and maintainable.

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Save, FileText, User, LogOut, AlertCircle } from 'lucide-react'
+import { ArrowLeft, Save, FileText, User, LogOut, AlertCircle, History } from 'lucide-react'
 import { useAuthStore } from '../stores/authStore'
 import { useDocumentStore } from '../stores/documentStore'
 import DocumentEditor from '../components/DocumentEditor'
 import LoadingSpinner from '../components/LoadingSpinner'
+import VersionHistory from '../components/VersionHistory'
 
 export default function DocumentPage() {
   const { id } = useParams<{ id: string }>()
@@ -14,6 +15,7 @@ export default function DocumentPage() {
   const [isEditingTitle, setIsEditingTitle] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [lastSaved, setLastSaved] = useState<Date | null>(null)
+  const [isVersionHistoryOpen, setIsVersionHistoryOpen] = useState(false)
   
   const { user, signOut } = useAuthStore()
   const { 
@@ -215,6 +217,15 @@ export default function DocumentPage() {
                   </>
                 )}
               </div>
+
+              <button
+                onClick={() => setIsVersionHistoryOpen(true)}
+                className="flex items-center text-sm text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors"
+                title="View version history"
+              >
+                <History className="w-4 h-4 mr-1" />
+                Version History
+              </button>
               
               <div className="flex items-center text-sm text-gray-600">
                 <User className="w-4 h-4 mr-1" />
@@ -241,6 +252,13 @@ export default function DocumentPage() {
           placeholder="Start writing your document..."
         />
       </main>
+
+      {/* Version History Modal */}
+      <VersionHistory
+        documentId={id || ''}
+        isOpen={isVersionHistoryOpen}
+        onClose={() => setIsVersionHistoryOpen(false)}
+      />
     </div>
   )
 } 

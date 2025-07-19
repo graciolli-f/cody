@@ -20,6 +20,17 @@ export interface Document {
   user_email?: string
 }
 
+export interface DocumentVersion {
+  id: string
+  document_id: string
+  title: string
+  content: string
+  change_type: 'created' | 'title_updated' | 'content_modified' | 'restored'
+  user_id: string
+  user_email?: string
+  created_at: string
+}
+
 export interface User {
   id: string
   email: string
